@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conference Speakers</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="container">
+    <h1 class="title">View our Featured Speakers for the Event</h1>
+    <p class="subtitle">Speakers are core contributors and industry thought leaders working at companies that push for innovation.</p>
+
+    <!-- Speaker Popover (Details Card) -->
+    <div class="popover" id="popover">
+      <button class="close-btn" onclick="closePopover()">✖</button>
+      <div class="popover-left">
+        <img src="" alt="" id="popoverImage" class="popover-image">
+      </div>
+      <div class="popover-middle">
+        <h2 class="popover-name" id="popoverName">John Doe</h2>
+        <p class="popover-position" id="popoverPosition">Chief Marketing Officer</p>
+        <p class="popover-company" id="popoverCompany">Acme Corp</p>
+      </div>
+      <div class="popover-right">
+        <p class="popover-bio" id="popoverBio">Dynamic description about the speaker.</p>
+      </div>
+    </div>
+
+    <div class="slider">
+      <div class="slider-content" id="sliderContent">
+        <!-- Speaker Cards -->
+        <div class="card" onclick="openPopover('John Doe', 'Chief Marketing Officer', 'Speclate', 'Monotonectally synergize business communities...', './360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg')">
+          <img src="./360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" alt="John Doe" class="card-image">
+          <h3 class="card-name">John Doe</h3>
+          <p class="card-position">Chief Marketing Officer</p>
+          <p class="card-company">Speclate</p>
+        </div>
+
+        <div class="card" onclick="openPopover('Jane Smith', 'Chief Engagement Officer', 'Acquia', 'Assertively unleash cross-platform best practices...', './360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg')">
+          <img src="./360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg" alt="Jane Smith" class="card-image">
+          <h3 class="card-name">Jane Smith</h3>
+          <p class="card-position">Chief Engagement Officer</p>
+          <p class="card-company">Acquia</p>
+        </div>
+
+        <div class="card" onclick="openPopover('Michael Brown', 'Chief Technical Developer', 'Pantheon', 'Synergistically monetize parallel intermediaries...', './istockphoto-1174056245-612x612.jpg')">
+          <img src="./istockphoto-1174056245-612x612.jpg" alt="Michael Brown" class="card-image">
+          <h3 class="card-name">Michael Brown</h3>
+          <p class="card-position">Chief Technical Developer</p>
+          <p class="card-company">Pantheon</p>
+        </div>
+
+        <div class="card" onclick="openPopover('Sarah Lee', 'Chief Marketing Officer', 'Speclate', 'Dramatically pursue real-time markets through e-business strategic theme areas...', './360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg')">
+            <img src="./360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" alt="Sarah Lee" class="card-image">
+            <h3 class="card-name">Sarah Lee</h3>
+            <p class="card-position">Chief Marketing Officer</p>
+            <p class="card-company">Speclate</p>
+        </div>
+      </div>
+    </div>
+    <button class="btn">See the Program</button>
+  </section>
+
+  <div class="slider-nav">
+    <button id="prevBtn" onclick="moveSlider(-1)" disabled>❮</button>
+    <button id="nextBtn" onclick="moveSlider(1)">❯</button>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>

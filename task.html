@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conference Speakers</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f9;
+  position: relative;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.slider {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.slider-content {
+  display: flex;
+  gap: 15px;
+  overflow: hidden;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 500px; /* Increased card width */
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, border-color 0.3s;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.selected {
+  border: 2px solid #9b59b6;
+}
+
+.card-image {
+  width: 70%;
+  border-radius: 50%;
+}
+
+.card-name {
+  font-size: 1rem;
+  margin: 10px 0 5px;
+  color: #333;
+}
+
+.card-position,
+.card-company {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+.popover {
+  background-color: #fff;
+  color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: none;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.popover-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: #333;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.popover-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.popover-name {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.popover-position {
+  font-size: 1rem;
+  color: #666;
+}
+
+.popover-company {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.popover-bio {
+  font-size: 0.9rem;
+  color: #333;
+  margin-top: 30px;
+}
+
+/* Slider Navigation */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.slider-nav .btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.slider-nav .btn:disabled {
+  background-color: #ccc;
+}
+  </style>
+</head>
+<body>
+  <section class="container">
+    <h1 class="title">View our Featured Speakers for the Event</h1>
+    <p class="subtitle">Speakers are core contributors and industry thought leaders working at companies that push for innovation.</p>
+
+    <!-- Speaker Popover (Details Card) -->
+    <div class="popover" id="popover">
+      <button class="close-btn" onclick="closePopover()">✖</button>
+      <div class="popover-left">
+        <img src="" alt="" id="popoverImage" class="popover-image">
+      </div>
+      <div class="popover-middle">
+        <h2 class="popover-name" id="popoverName">John Doe</h2>
+        <p class="popover-position" id="popoverPosition">Chief Marketing Officer</p>
+        <p class="popover-company" id="popoverCompany">Acme Corp</p>
+      </div>
+      <div class="popover-right">
+        <p class="popover-bio" id="popoverBio">Dynamic description about the speaker.</p>
+      </div>
+    </div>
+
+    <div class="slider">
+      <div class="slider-content" id="sliderContent">
+        <!-- Speaker Cards -->
+        <div class="card" onclick="openPopover('John Doe', 'Chief Marketing Officer', 'Speclate', 'Monotonectally synergize business communities...', './360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg')">
+          <img src="./360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" alt="John Doe" class="card-image">
+          <h3 class="card-name">John Doe</h3>
+          <p class="card-position">Chief Marketing Officer</p>
+          <p class="card-company">Speclate</p>
+        </div>
+
+        <div class="card" onclick="openPopover('Jane Smith', 'Chief Engagement Officer', 'Acquia', 'Assertively unleash cross-platform best practices...', './360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg')">
+          <img src="./360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg" alt="Jane Smith" class="card-image">
+          <h3 class="card-name">Jane Smith</h3>
+          <p class="card-position">Chief Engagement Officer</p>
+          <p class="card-company">Acquia</p>
+        </div>
+
+        <div class="card" onclick="openPopover('Michael Brown', 'Chief Technical Developer', 'Pantheon', 'Synergistically monetize parallel intermediaries...', './istockphoto-1174056245-612x612.jpg')">
+          <img src="./istockphoto-1174056245-612x612.jpg" alt="Michael Brown" class="card-image">
+          <h3 class="card-name">Michael Brown</h3>
+          <p class="card-position">Chief Technical Developer</p>
+          <p class="card-company">Pantheon</p>
+        </div>
+
+        <div class="card" onclick="openPopover('Sarah Lee', 'Chief Marketing Officer', 'Speclate', 'Dramatically pursue real-time markets through e-business strategic theme areas...', './360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg')">
+            <img src="./360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" alt="Sarah Lee" class="card-image">
+            <h3 class="card-name">Sarah Lee</h3>
+            <p class="card-position">Chief Marketing Officer</p>
+            <p class="card-company">Speclate</p>
+        </div>
+      </div>
+    </div>
+    <button class="btn">See the Program</button>
+  </section>
+
+  <div class="slider-nav">
+    <button id="prevBtn" onclick="moveSlider(-1)" disabled>❮</button>
+    <button id="nextBtn" onclick="moveSlider(1)">❯</button>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+const cards = document.querySelectorAll(".card");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const sliderContent = document.getElementById("sliderContent");
+const totalCards = cards.length;
+
+function moveSlider(direction) {
+  currentIndex += direction;
+  if (currentIndex < 0) currentIndex = totalCards - 1;
+  if (currentIndex >= totalCards) currentIndex = 0;
+  updateSlider();
+}
+
+function updateSlider() {
+  sliderContent.style.transform = `translateX(-${
+    currentIndex * (cards[0].offsetWidth + 15)
+  }px)`;
+  prevBtn.disabled = currentIndex === 0;
+  nextBtn.disabled = currentIndex === totalCards - 1;
+}
+
+function openPopover(name, position, company, bio, imageUrl) {
+  document.getElementById("popoverName").innerText = name;
+  document.getElementById("popoverPosition").innerText = position;
+  document.getElementById("popoverCompany").innerText = company;
+  document.getElementById("popoverBio").innerText = bio;
+  document.getElementById("popoverImage").src = imageUrl;
+  document.getElementById("popover").style.display = "flex";
+}
+
+function closePopover() {
+  document.getElementById("popover").style.display = "none";
+}
+
+  </script>
+</body>
+</html>
+
+

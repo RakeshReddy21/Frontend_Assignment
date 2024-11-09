@@ -65,7 +65,7 @@ body {
 }
 
 .card-image {
-  width: 70%;
+    width: 100%;
   border-radius: 50%;
 }
 
@@ -93,6 +93,8 @@ body {
 }
 
 .popover {
+  width: 100% !important; /* or use a fixed width like 600px */
+  max-width: 800px; /* Optional: maximum limit */
   background-color: #fff;
   color: #333;
   padding: 20px;
@@ -104,6 +106,7 @@ body {
   gap: 20px;
   margin-top: 20px;
   position: relative;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .popover-content {
@@ -179,4 +182,9 @@ body {
 
 .slider-nav .btn:disabled {
   background-color: #ccc;
+}
+#next{
+    background-color: #dad4d4;
+    border-radius: 50%;
+    border: 0 !important;
 }
